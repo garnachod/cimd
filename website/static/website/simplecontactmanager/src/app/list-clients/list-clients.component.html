@@ -1,0 +1,88 @@
+<mat-toolbar color="primary">
+  <span>Prueba CIMD</span>
+  <span class="toolbar-spacer"></span>
+  <button mat-raised-button color="accent" (click)="goAddClient()">añadir cliente</button>
+</mat-toolbar>
+
+<div class="filter-form-container">
+  <mat-form-field class="filter-form">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrar clientes" >
+  </mat-form-field>
+</div>
+
+<mat-table #table [dataSource]="dataSource">
+  <!-- edit Column -->
+  <ng-container matColumnDef="edit">
+    <mat-header-cell *matHeaderCellDef disableClear="true">
+      Editar
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+        <button mat-raised-button color="primary" (click)="goEditClient(row.id)">
+            <mat-icon>mode_edit</mat-icon>
+        </button>
+    </mat-cell>
+  </ng-container>
+ 
+  <!-- country Column -->
+  <ng-container matColumnDef="country">
+      <mat-header-cell *matHeaderCellDef disableClear="true">
+        Pais
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.country }}</mat-cell>
+    </ng-container>
+
+  <!-- postal_code Column -->
+  <ng-container matColumnDef="postal_code">
+      <mat-header-cell *matHeaderCellDef disableClear="true">
+        Código Postal
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.postal_code }}</mat-cell>
+    </ng-container>
+
+  <!-- locality Column -->
+  <ng-container matColumnDef="locality">
+      <mat-header-cell *matHeaderCellDef disableClear="true">
+        Población
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.locality }}</mat-cell>
+    </ng-container>
+
+  <!-- street Column -->
+  <ng-container matColumnDef="street">
+      <mat-header-cell *matHeaderCellDef disableClear="true">
+        Calle
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.street }}</mat-cell>
+    </ng-container>
+
+  <!-- email Column -->
+  <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef disableClear="true">
+        Email
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.email }}</mat-cell>
+    </ng-container>
+
+  <!-- telephone Column -->
+  <ng-container matColumnDef="telephone">
+      <mat-header-cell *matHeaderCellDef disableClear="true">
+        teléfono
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">{{ row.telephone }}</mat-cell>
+    </ng-container>
+
+  <!-- name Column -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef disableClear="true">
+      Nombre
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.name + ' ' + row.last_name }}</mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<mat-paginator [length]="resultsLength" [pageSize]="50" (page)="pageChange()">
+</mat-paginator>
+  

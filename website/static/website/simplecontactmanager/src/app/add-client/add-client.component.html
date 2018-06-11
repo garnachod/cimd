@@ -1,0 +1,73 @@
+<mat-toolbar color="primary">
+    <span>Prueba CIMD</span>
+    <span class="toolbar-spacer"></span>
+    <button mat-raised-button color="accent" (click)="goListContacts()">atrás</button>
+</mat-toolbar>
+
+
+<form class="form-container" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field class="field-form">
+          <input matInput placeholder="Nombre" [formControl]="genericFormControl1" [value]="contact.name" [(ngModel)]="contact.name" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="field-form">
+          <input matInput placeholder="Apellidos" [formControl]="genericFormControl2" [value]="contact.last_name" [(ngModel)]="contact.last_name" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="field-form">
+          <input matInput placeholder="Teléfono móvil con código de pais" [formControl]="telephone" [value]="contact.telephone" [(ngModel)]="contact.telephone" pattern="^\+[1-9]{1,2}[0-9]{3,14}$" required>
+          <mat-error *ngIf="telephone.invalid">{{getTelephoneErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="field-form"> 
+          <input matInput placeholder="Email" [formControl]="email" [value]="contact.email" [(ngModel)]="contact.email" required>
+          <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="field-form">
+          <input matInput placeholder="Página web" [formControl]="genericFormControl4" [value]="contact.website" [(ngModel)]="contact.website" required>
+        </mat-form-field>
+    </p>
+    <p>
+    <mat-form-field class="field-form">
+      <input type="text" placeholder="Dirección" aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto" required>
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions | async" [value]="option.description" (onSelectionChange)="onSelectionChange($event)">
+          {{ option.description }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field class="field-form"  *ngIf="selectecInfoPlace != null || contact.id != -1">
+        <input matInput placeholder="Calle" [formControl]="genericFormControl5" [value]="contact.street" [(ngModel)]="contact.street" required>
+      </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="field-form" *ngIf="selectecInfoPlace != null || contact.id != -1">
+          <input matInput placeholder="Ciudad" [formControl]="genericFormControl6" [value]="contact.locality" [(ngModel)]="contact.locality" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="field-form" *ngIf="selectecInfoPlace != null || contact.id != -1">
+          <input matInput placeholder="Codigo Postal" [formControl]="genericFormControl7" [value]="contact.postal_code" [(ngModel)]="contact.postal_code" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="field-form" *ngIf="selectecInfoPlace != null || contact.id != -1">
+          <input matInput placeholder="Pais" [formControl]="genericFormControl8" [value]="contact.country" [(ngModel)]="contact.country" required>
+        </mat-form-field>
+    </p>
+    <p>
+        <button type="submit" mat-raised-button color="accent"  *ngIf="contact.id == -1">Añadir</button>
+    </p>
+    <p>
+        <button type="submit" mat-raised-button color="accent" *ngIf="contact.id != -1">Editar</button>
+    </p>
+  </form>
+  

@@ -1,0 +1,24 @@
+.client-info{
+    width: 100%;
+}
+.client-info-left{
+    float:left;
+    width: 50%;
+    text-align:left;
+}
+.client-info-right{
+    float:left;
+    width: 50%;
+    text-align:right;
+}
+
+.filter-form{
+    width: 100%;
+    max-width: 600px;
+}
+
+.filter-form-container{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
